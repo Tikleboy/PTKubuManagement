@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Admin Dashboard') | PT. KUBU MANAGEMENT BALI CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        body { font-family: 'Albert Sans', sans-serif; }
+        .font-fraunces { font-family: 'Fraunces', serif; }
+    </style>
+</head>
+<body class="bg-[#F5F1E8] text-[#3B2114] min-h-screen flex flex-col">
+
+    <!-- Top Admin Bar -->
+    <header class="bg-[#6B2203] text-white px-6 py-3.5 border-b border-[#965E03]/40 flex items-center justify-between shadow-sm">
+        <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-[8px] bg-[#965E03] text-white flex items-center justify-center font-fraunces font-bold text-sm">K</span>
+            <div>
+                <a href="{{ route('admin.dashboard') }}" class="font-fraunces font-bold text-base tracking-wide text-white hover:text-[#D4A574]">
+                    KUBU MANAGEMENT BALI <span class="text-xs font-normal text-[#D4A574] ml-1">CMS Admin</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-4 text-xs">
+            <a href="{{ route('home') }}" target="_blank" class="text-[#D4A574] hover:text-white flex items-center gap-1">
+                <span>Lihat Website</span> ↗
+            </a>
+            <span class="text-white/30">|</span>
+            <span class="text-white/80">{{ Auth::user()->name ?? 'Administrator' }}</span>
+            <form action="{{ route('admin.logout') }}" method="POST" class="inline">
+                @csrf
+                <button type="submit" class="bg-[#965E03] hover:bg-[#825203] px-3 py-1.5 rounded-[8px] text-white font-medium">
+                    Logout
+                </button>
+            </form>
+        </div>
+    </header>
+
+    <div class="flex-1 flex flex-col md:flex-row">
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-white border-r border-[#E8DEC8] p-5 shrink-0 space-y-6">
+            <div class="space-y-1">
+                <span class="label-caps text-[#965E03] text-[10px] font-bold px-3">MENU CMS</span>
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs font-semibold {{ request()->routeIs('admin.dashboard') ? 'bg-[#965E03] text-white' : 'text-[#4A2D1B] hover:bg-[#FAF7F2]' }}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{{ route('admin.company.edit') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs font-semibold {{ request()->routeIs('admin.company.*') ? 'bg-[#965E03] text-white' : 'text-[#4A2D1B] hover:bg-[#FAF7F2]' }}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    <span>Company Profile</span>
+                </a>
+                <a href="{{ route('admin.services.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs font-semibold {{ request()->routeIs('admin.services.*') ? 'bg-[#965E03] text-white' : 'text-[#4A2D1B] hover:bg-[#FAF7F2]' }}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    <span>Kelola Layanan (Services)</span>
+                </a>
+                <a href="{{ route('admin.projects.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs font-semibold {{ request()->routeIs('admin.projects.*') ? 'bg-[#965E03] text-white' : 'text-[#4A2D1B] hover:bg-[#FAF7F2]' }}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <span>Kelola Project (Portfolio)</span>
+                </a>
+                <a href="{{ route('admin.gallery.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs font-semibold {{ request()->routeIs('admin.gallery.*') ? 'bg-[#965E03] text-white' : 'text-[#4A2D1B] hover:bg-[#FAF7F2]' }}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <span>Kelola Galeri Foto</span>
+                </a>
+                <a href="{{ route('admin.careers.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs font-semibold {{ request()->routeIs('admin.careers.*') ? 'bg-[#965E03] text-white' : 'text-[#4A2D1B] hover:bg-[#FAF7F2]' }}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <span>Kelola Karir / Loker</span>
+                </a>
+            </div>
+
+            <div class="space-y-1 pt-4 border-t border-[#E8DEC8]">
+                <span class="label-caps text-[#965E03] text-[10px] font-bold px-3">INTERAKSI & KONFIGURASI</span>
+                <a href="{{ route('admin.inquiries.index') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs font-semibold {{ request()->routeIs('admin.inquiries.*') ? 'bg-[#965E03] text-white' : 'text-[#4A2D1B] hover:bg-[#FAF7F2]' }}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+                    <span>Pesan Masuk (Inquiries)</span>
+                </a>
+                <a href="{{ route('admin.contact.edit') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs font-semibold {{ request()->routeIs('admin.contact.*') ? 'bg-[#965E03] text-white' : 'text-[#4A2D1B] hover:bg-[#FAF7F2]' }}">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                    <span>Kontak & WhatsApp</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="flex-1 p-6 md:p-10">
+            @if(session('success'))
+                <div class="mb-6 p-4 rounded-[12px] bg-[#2D6A4F]/10 border border-[#2D6A4F]/30 text-[#2D6A4F] text-xs font-semibold flex items-center gap-2">
+                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span>{{ session('success') }}</span>
+                </div>
+            @endif
+
+            @if($errors->any())
+                <div class="mb-6 p-4 rounded-[12px] bg-red-50 border border-red-200 text-red-700 text-xs space-y-1">
+                    <p class="font-bold">Perhatian:</p>
+                    <ul class="list-disc list-inside">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @yield('content')
+        </main>
+    </div>
+</body>
+</html>

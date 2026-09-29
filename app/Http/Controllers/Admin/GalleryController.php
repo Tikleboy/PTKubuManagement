@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\GalleryCategory;
+use App\Models\GalleryImage;
+use Illuminate\Http\Request;
+
+class GalleryController extends Controller
+{
+    public function index()
+    {
+        $images = GalleryImage::with('category')->orderBy('parent_group')->orderBy('sort_order')->get();
+        $categories = GalleryCategory::orderBy('parent_group')->orderBy('sort_order')->get();
+
+        return view('admin.gallery.index', compact('images', 'categories'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'caption' => 'nullable|string|max:500',
+            'parent_group' => 'required|in:landscape,housekeeping',
+            'gallery_category_id' => 'nullable|exists:gallery_categories,id',
+            'image' => 'required|image|max:5120',
+            'sort_order' => 'integer|min:0',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('uploads/gallery', 'public');
+            $validated['image_path'] = 'storage/' . $path;
+        }
+
+        $validated['is_published'] = true;
+
+        GalleryImage::create($validated);
+
+        return redirect()->route('admin.gallery.index')->with('success', 'Foto Galeri berhasil ditambahkan.');
+    }
+
+    public function destroy(GalleryImage $image)
+    {
+        $image->delete();
+        return redirect()->route('admin.gallery.index')->with('success', 'Foto Galeri berhasil dihapus.');
+    }
+}
