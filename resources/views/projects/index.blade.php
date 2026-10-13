@@ -80,12 +80,11 @@
                                 @endif
                             </div>
 
-                            <div class="pt-4 border-t border-[#E8DEC8] flex items-center justify-between">
-                                <a href="{{ route('projects.show', $project->slug) }}" class="btn-primary text-xs px-4 py-2.5">
+                            <div class="pt-4 border-t border-[#E8DEC8]">
+                                <a href="{{ route('projects.show', $project->slug) }}" class="btn-primary text-xs px-4 py-2.5 inline-flex items-center gap-1.5">
                                     <span>{{ __('VIEW TRANSFORMATION DETAILS') }}</span>
                                     <span>→</span>
                                 </a>
-                                <span class="text-xs text-[#7A5B49] italic">{{ __('Portfolio Showcase') }}</span>
                             </div>
                         </div>
                     </div>

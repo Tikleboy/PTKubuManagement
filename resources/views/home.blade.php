@@ -393,9 +393,8 @@
                             </span>
                         </div>
                         <div class="p-4 space-y-2">
-                            <div class="flex items-center justify-between text-[11px] text-[#7A5B49]">
+                            <div class="text-[11px] text-[#7A5B49]">
                                 <span>{{ $project->location ?? 'Bali' }}</span>
-                                <span class="text-[#965E03] font-medium">{{ __('Portfolio Showcase') }}</span>
                             </div>
                             <h4 class="font-fraunces text-base font-bold text-[#6B2203]">
                                 {{ __($project->title) }}
