@@ -29,8 +29,49 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'role' => User::ROLE_CS,
             'remember_token' => Str::random(10),
         ];
+    }
+
+    /**
+     * Indicate that the user is a super administrator.
+     */
+    public function superAdmin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => User::ROLE_SUPER_ADMIN,
+        ]);
+    }
+
+    /**
+     * Indicate that the user is a content editor.
+     */
+    public function editor(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => User::ROLE_EDITOR,
+        ]);
+    }
+
+    /**
+     * Indicate that the user is an HR officer.
+     */
+    public function hr(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => User::ROLE_HR,
+        ]);
+    }
+
+    /**
+     * Indicate that the user is a customer service representative.
+     */
+    public function cs(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => User::ROLE_CS,
+        ]);
     }
 
     /**

@@ -41,11 +41,6 @@ class CareerController extends Controller
         return redirect()->route('admin.careers.index')->with('success', 'Lowongan pekerjaan berhasil ditambahkan.');
     }
 
-    public function show(Career $career)
-    {
-        return redirect()->route('admin.careers.edit', $career->id);
-    }
-
     public function edit(Career $career)
     {
         return view('admin.careers.edit', compact('career'));

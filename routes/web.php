@@ -18,6 +18,8 @@ use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\CareerController as AdminCareerController;
 use App\Http\Controllers\Admin\ContactSettingController as AdminContactController;
 use App\Http\Controllers\Admin\InquiryController as AdminInquiryController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,33 +111,43 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
-        // Company Profile & Settings
-        Route::get('/company', [AdminCompanyController::class, 'edit'])->name('company.edit');
-        Route::put('/company', [AdminCompanyController::class, 'update'])->name('company.update');
+        // Profil Saya (My Profile) - Accessible to all roles
+        Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile', [AdminProfileController::class, 'update'])->name('profile.update');
 
-        // Services
-        Route::resource('services', AdminServiceController::class);
+        // Super Admin Restricted (Company Settings, Contact Settings, Admin Users)
+        Route::middleware('role:super_admin')->group(function () {
+            Route::get('/company', [AdminCompanyController::class, 'edit'])->name('company.edit');
+            Route::put('/company', [AdminCompanyController::class, 'update'])->name('company.update');
 
-        // Projects
-        Route::resource('projects', AdminProjectController::class);
+            Route::get('/contact', [AdminContactController::class, 'edit'])->name('contact.edit');
+            Route::put('/contact', [AdminContactController::class, 'update'])->name('contact.update');
 
-        // Gallery
-        Route::get('/gallery', [AdminGalleryController::class, 'index'])->name('gallery.index');
-        Route::post('/gallery', [AdminGalleryController::class, 'store'])->name('gallery.store');
-        Route::delete('/gallery/{image}', [AdminGalleryController::class, 'destroy'])->name('gallery.destroy');
+            Route::resource('users', AdminUserController::class)->except(['show']);
+        });
 
-        // Careers
-        Route::resource('careers', AdminCareerController::class);
-        Route::post('/careers/{career}/toggle', [AdminCareerController::class, 'togglePublish'])->name('careers.toggle');
+        // Content Editor & Super Admin (Services, Projects, Gallery)
+        Route::middleware('role:editor')->group(function () {
+            Route::resource('services', AdminServiceController::class)->except(['show']);
+            Route::resource('projects', AdminProjectController::class)->except(['show']);
 
-        // Contact Settings & WhatsApp
-        Route::get('/contact', [AdminContactController::class, 'edit'])->name('contact.edit');
-        Route::put('/contact', [AdminContactController::class, 'update'])->name('contact.update');
+            Route::get('/gallery', [AdminGalleryController::class, 'index'])->name('gallery.index');
+            Route::post('/gallery', [AdminGalleryController::class, 'store'])->name('gallery.store');
+            Route::delete('/gallery/{image}', [AdminGalleryController::class, 'destroy'])->name('gallery.destroy');
+        });
 
-        // Inquiries
-        Route::get('/inquiries', [AdminInquiryController::class, 'index'])->name('inquiries.index');
-        Route::get('/inquiries/{inquiry}', [AdminInquiryController::class, 'show'])->name('inquiries.show');
-        Route::put('/inquiries/{inquiry}/status', [AdminInquiryController::class, 'updateStatus'])->name('inquiries.status');
-        Route::delete('/inquiries/{inquiry}', [AdminInquiryController::class, 'destroy'])->name('inquiries.destroy');
+        // HR & Super Admin (Careers)
+        Route::middleware('role:hr')->group(function () {
+            Route::resource('careers', AdminCareerController::class)->except(['show']);
+            Route::post('/careers/{career}/toggle', [AdminCareerController::class, 'togglePublish'])->name('careers.toggle');
+        });
+
+        // CS & Super Admin (Inquiries)
+        Route::middleware('role:cs')->group(function () {
+            Route::get('/inquiries', [AdminInquiryController::class, 'index'])->name('inquiries.index');
+            Route::get('/inquiries/{inquiry}', [AdminInquiryController::class, 'show'])->name('inquiries.show');
+            Route::put('/inquiries/{inquiry}/status', [AdminInquiryController::class, 'updateStatus'])->name('inquiries.status');
+            Route::delete('/inquiries/{inquiry}', [AdminInquiryController::class, 'destroy'])->name('inquiries.destroy');
+        });
     });
 });

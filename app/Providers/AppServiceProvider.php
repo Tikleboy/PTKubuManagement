@@ -9,6 +9,7 @@ use App\Models\ServiceCategory;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Validation\Rules\Password;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Password::defaults(function () {
+            return Password::min(8)->uncompromised();
+        });
+
         View::composer('*', function ($view) {
             try {
                 $company = Schema::hasTable('company_profiles') ? CompanyProfile::first() : null;

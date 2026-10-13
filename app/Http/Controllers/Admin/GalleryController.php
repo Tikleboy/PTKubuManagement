@@ -24,7 +24,7 @@ class GalleryController extends Controller
             'caption' => 'nullable|string|max:500',
             'parent_group' => 'required|in:landscape,housekeeping',
             'gallery_category_id' => 'nullable|exists:gallery_categories,id',
-            'image' => 'required|image|max:5120',
+            'image' => 'required|image|mimes:jpeg,png,webp,jpg|max:5120',
             'sort_order' => 'integer|min:0',
         ]);
 
@@ -42,7 +42,16 @@ class GalleryController extends Controller
 
     public function destroy(GalleryImage $image)
     {
-        $image->delete();
+        $oldPath = $image->image_path;
+
+        \Illuminate\Support\Facades\DB::transaction(function () use ($image) {
+            $image->delete();
+        });
+
+        if ($oldPath) {
+            \App\Services\ManagedUploadService::deleteIfUnreferenced($oldPath);
+        }
+
         return redirect()->route('admin.gallery.index')->with('success', 'Foto Galeri berhasil dihapus.');
     }
 }

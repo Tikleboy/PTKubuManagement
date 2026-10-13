@@ -459,7 +459,7 @@
                     <span class="label-caps text-[#D4A574] font-bold text-xs tracking-widest">
                         {{ __('CONSULTATION & INQUIRIES') }}
                     </span>
-                    <h2 class="font-fraunces text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                    <h2 class="font-fraunces text-3xl sm:text-4xl lg:text-5xl font-bold !text-white text-white leading-tight" style="color: #FFFFFF !important;">
                         {{ __('Ready to Enhance Your Bali Property?') }}
                     </h2>
                     <p class="text-[#F5F1E8]/80 text-base leading-relaxed">

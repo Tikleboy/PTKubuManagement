@@ -69,12 +69,12 @@
                                 <span>{{ __('REQUEST A QUOTE (WHATSAPP)') }}</span>
                             </a>
                             <a href="{{ route('contact.index') }}" class="btn-secondary w-full py-3 text-center">
-                                <span>{{ __('SEND INQUIRY FORM') }}</span>
+                                <span>{{ __('CONTACT US') }}</span>
                             </a>
                         </div>
 
                         <div class="pt-4 border-t border-[#E8DEC8] text-xs text-[#7A5B49] space-y-1">
-                            <p><strong>{{ __('Hotline:') }}</strong> {{ $globalContact->whatsapp_number ?? '+62 812-3456-7890' }}</p>
+                            <p><strong>{{ __('Hotline:') }}</strong> {{ $globalContact->whatsapp_number ?? '+62 857-3826-1654' }}</p>
                             <p><strong>{{ __('Email:') }}</strong> {{ $globalContact->email ?? 'info@kubumanagementbali.com' }}</p>
                         </div>
                     </div>

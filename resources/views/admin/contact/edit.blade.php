@@ -27,7 +27,7 @@
                     <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">
                         Nomor WhatsApp Resmi
                     </label>
-                    <input type="text" name="whatsapp_number" value="{{ old('whatsapp_number', $contact->whatsapp_number) }}" required placeholder="+62 812-3456-7890" class="w-full px-3 py-2.5 rounded-[10px] bg-white border border-[#E8DEC8] text-xs font-medium">
+                    <input type="text" name="whatsapp_number" value="{{ old('whatsapp_number', $contact->whatsapp_number) }}" required placeholder="+62 857-3826-1654" class="w-full px-3 py-2.5 rounded-[10px] bg-white border border-[#E8DEC8] text-xs font-medium">
                     <span class="text-[11px] text-[#7A5B49] mt-1 block">Nomor ini menjadi tujuan seluruh tombol "REQUEST A QUOTE" di website dan mobile.</span>
                 </div>
 

@@ -29,7 +29,7 @@ class ServiceController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'features' => 'nullable|string', // newline separated
-            'image' => 'nullable|image|max:4096',
+            'image' => 'nullable|image|mimes:jpeg,png,webp,jpg|max:4096',
             'sort_order' => 'integer|min:0',
             'is_published' => 'nullable',
         ]);
@@ -68,10 +68,12 @@ class ServiceController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'features' => 'nullable|string',
-            'image' => 'nullable|image|max:4096',
+            'image' => 'nullable|image|mimes:jpeg,png,webp,jpg|max:4096',
             'sort_order' => 'integer|min:0',
             'is_published' => 'nullable',
         ]);
+
+        $oldImage = $service->image;
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('uploads/services', 'public');
@@ -86,14 +88,29 @@ class ServiceController extends Controller
 
         $validated['is_published'] = $request->boolean('is_published');
 
-        $service->update($validated);
+        \Illuminate\Support\Facades\DB::transaction(function () use ($service, $validated) {
+            $service->update($validated);
+        });
+
+        if ($request->hasFile('image') && $oldImage && $oldImage !== $service->image) {
+            \App\Services\ManagedUploadService::deleteIfUnreferenced($oldImage);
+        }
 
         return redirect()->route('admin.services.index')->with('success', 'Layanan berhasil diperbarui.');
     }
 
     public function destroy(Service $service)
     {
-        $service->delete();
+        $oldImage = $service->image;
+
+        \Illuminate\Support\Facades\DB::transaction(function () use ($service) {
+            $service->delete();
+        });
+
+        if ($oldImage) {
+            \App\Services\ManagedUploadService::deleteIfUnreferenced($oldImage);
+        }
+
         return redirect()->route('admin.services.index')->with('success', 'Layanan berhasil dihapus.');
     }
 }

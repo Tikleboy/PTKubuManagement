@@ -58,6 +58,8 @@ class PublicPagesTest extends TestCase
         // Home Page in English
         $response = $this->withSession($session)->get('/');
         $response->assertStatus(200);
+        $response->assertSee('images/kubu/logo.png');
+        $response->assertSee('favicon.ico');
         $response->assertSee('OUR PROJECTS');
         $response->assertSee('CAREERS');
         $response->assertSee('EXPLORE LANDSCAPE');
@@ -90,9 +92,15 @@ class PublicPagesTest extends TestCase
         // Contact Page in English
         $response = $this->withSession($session)->get('/contact');
         $response->assertStatus(200);
+        $response->assertSee('CONTACT KUBU MANAGEMENT BALI');
+        $response->assertSee('FAST WHATSAPP RESPONSE');
+        $response->assertSee('Official Contact Information');
         $response->assertSee('Send Us a Message');
         $response->assertSee('Full Name');
         $response->assertSee('SEND MESSAGE NOW');
+        $response->assertSee('+62 857-3826-1654');
+        $response->assertSee('info@kubumanagementbali.com');
+        $response->assertSee('Jalan Pura Banyukuning No.1');
     }
 
     public function test_indonesian_localization_rendering(): void
@@ -115,6 +123,8 @@ class PublicPagesTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Tentang Kami');
         $response->assertSee('PROFIL PERUSAHAAN');
+        $response->assertSee('I Wayan Suardika &amp; Ni Putu Devi Handayani', false);
+        $response->assertSee('Merawat Keindahan, Menjaga Kenyamanan, Membangun Kepercayaan');
         $response->assertSee('VISI');
         $response->assertSee('MISI');
 
@@ -134,9 +144,15 @@ class PublicPagesTest extends TestCase
         // Contact Page in Indonesian
         $response = $this->withSession($session)->get('/contact');
         $response->assertStatus(200);
+        $response->assertSee('HUBUNGI KUBU MANAGEMENT BALI');
+        $response->assertSee('RESPON CEPAT WHATSAPP');
+        $response->assertSee('Informasi Kontak Resmi');
         $response->assertSee('Kirim Pesan atau Pertanyaan');
         $response->assertSee('Nama Lengkap');
         $response->assertSee('KIRIM PESAN SEKARANG');
+        $response->assertSee('+62 857-3826-1654');
+        $response->assertSee('Jalan Pura Banyukuning No.1');
+        $response->assertSee('info@kubumanagementbali.com');
     }
 
     public function test_contact_form_submission(): void

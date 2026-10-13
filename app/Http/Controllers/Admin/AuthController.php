@@ -26,6 +26,14 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
+
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            $user->update([
+                'last_login_at' => now(),
+                'last_login_ip' => $request->ip(),
+            ]);
+
             return redirect()->intended(route('admin.dashboard'));
         }
 

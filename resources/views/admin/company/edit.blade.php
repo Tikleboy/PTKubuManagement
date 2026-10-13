@@ -41,7 +41,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Deskripsi Perusahaan (About Us)</label>
-                    <textarea name="description" rows="4" required class="w-full px-3 py-2.5 rounded-[10px] bg-[#FAF7F2] border border-[#E8DEC8] text-xs">{{ old('description', $company->description) }}</textarea>
+                    <textarea name="description" rows="8" required class="w-full px-3 py-2.5 rounded-[10px] bg-[#FAF7F2] border border-[#E8DEC8] text-xs leading-relaxed">{{ old('description', $company->description) }}</textarea>
                 </div>
             </div>
 

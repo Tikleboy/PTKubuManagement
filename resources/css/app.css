@@ -47,17 +47,19 @@ html, body {
     background: transparent;
 }
 
-body {
-    font-family: 'Albert Sans', sans-serif;
-    background-color: #F5F1E8;
-    color: #43281C;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-}
+@layer base {
+    body {
+        font-family: 'Albert Sans', sans-serif;
+        background-color: #F5F1E8;
+        color: #43281C;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+    }
 
-h1, h2, h3, h4, .font-heading {
-    font-family: 'Fraunces', Georgia, serif;
-    color: #6B2203;
+    h1, h2, h3, h4, .font-heading {
+        font-family: 'Fraunces', Georgia, serif;
+        color: #6B2203;
+    }
 }
 
 /* Warm brown subtle shadows */

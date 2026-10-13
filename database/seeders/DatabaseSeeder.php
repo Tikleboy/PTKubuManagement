@@ -20,14 +20,30 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Admin User
-        User::firstOrCreate(
-            ['email' => 'admin@kubumanagementbali.com'],
-            [
-                'name' => 'Kubu Administrator',
-                'password' => Hash::make('admin12345'),
-            ]
-        );
+        // 1. Initial Administrator Provisioning
+        $adminEmail = env('ADMIN_INITIAL_EMAIL', 'admin@kubumanagementbali.com');
+        if (! User::where('email', $adminEmail)->exists()) {
+            $initialPassword = env('ADMIN_INITIAL_PASSWORD');
+
+            if (empty($initialPassword)) {
+                if (app()->environment('production')) {
+                    if ($this->command) {
+                        $this->command->warn('Production seeding: ADMIN_INITIAL_PASSWORD is not set. Skipping administrator provisioning. Use [php artisan admin:create] to provision an administrator.');
+                    }
+                } else {
+                    if ($this->command) {
+                        $this->command->info('Seeding: ADMIN_INITIAL_PASSWORD is not set. Skipping initial administrator provisioning.');
+                    }
+                }
+            } else {
+                User::create([
+                    'name' => env('ADMIN_INITIAL_NAME', 'Kubu Administrator'),
+                    'email' => $adminEmail,
+                    'role' => User::ROLE_SUPER_ADMIN,
+                    'password' => Hash::make($initialPassword),
+                ]);
+            }
+        }
 
         // 2. Company Profile
         CompanyProfile::firstOrCreate(
@@ -36,13 +52,13 @@ class DatabaseSeeder extends Seeder
                 'name' => 'PT. KUBU MANAGEMENT BALI',
                 'tagline' => 'Professional Property Care Services in Bali',
                 'subtagline' => 'LANDSCAPE • HOUSEKEEPING • PROPERTY CARE',
-                'description' => 'KUBU MANAGEMENT BALI adalah perusahaan jasa yang bergerak dalam bidang pengelolaan landscape, perawatan taman, dan housekeeping untuk hotel, villa, residential property, serta properti komersial di Bali.',
-                'vision' => 'To become a trusted professional property service partner in Bali.',
+                'description' => "PT KUBU MANAGEMENT BALI adalah perusahaan jasa profesional yang bergerak di bidang pengelolaan lanskap, perawatan taman, dan tata graha (housekeeping) untuk hotel, vila, properti hunian, serta properti komersial di Bali.\n\nDidirikan dan dipimpin oleh I Wayan Suardika & Ni Putu Devi Handayani, KUBU MANAGEMENT hadir dengan komitmen untuk memberikan pelayanan berkualitas, menjaga keindahan lingkungan, serta memastikan setiap properti dikelola dengan baik, bersih, nyaman, dan terawat.\n\nDengan mengutamakan profesionalisme, ketelitian, dan kepuasan pelanggan, PT KUBU MANAGEMENT BALI terus berupaya menjadi mitra terpercaya dalam menciptakan lingkungan properti yang asri, harmonis, dan bernilai tinggi. Berlandaskan semangat pelayanan dan tanggung jawab, kami percaya bahwa setiap detail memiliki arti penting dalam menghadirkan kenyamanan dan kualitas terbaik bagi setiap klien.\n\nKUBU MANAGEMENT BALI — Merawat Keindahan, Menjaga Kenyamanan, Membangun Kepercayaan.",
+                'vision' => 'Menjadi mitra layanan properti profesional tepercaya di Bali.',
                 'mission' => [
-                    'Memberikan pelayanan profesional.',
-                    'Menjaga kualitas dan kebersihan properti.',
-                    'Mengembangkan tenaga kerja yang kompeten.',
-                    'Memberikan solusi sesuai kebutuhan setiap klien.',
+                    'Memberikan pelayanan profesional dan dapat diandalkan.',
+                    'Menjaga standar kualitas, kebersihan, dan estetika properti secara konsisten.',
+                    'Mengembangkan tenaga kerja yang kompeten, disiplin, dan terlatih.',
+                    'Memberikan solusi yang disesuaikan dengan kebutuhan setiap klien.',
                 ],
                 'about_image' => 'images/kubu/landscape_service.jpg',
                 'hero_image' => 'images/kubu/hero_bali.jpg',
@@ -66,13 +82,13 @@ class DatabaseSeeder extends Seeder
         ContactSetting::firstOrCreate(
             ['id' => 1],
             [
-                'whatsapp_number' => '+62 812-3456-7890',
+                'whatsapp_number' => '+62 857-3826-1654',
                 'default_whatsapp_message' => 'Halo KUBU MANAGEMENT BALI, saya ingin mendapatkan informasi mengenai layanan Landscape/Housekeeping.',
                 'email' => 'info@kubumanagementbali.com',
                 'instagram' => '@kubumanagementbali',
                 'instagram_url' => 'https://instagram.com/kubumanagementbali',
-                'office_address' => 'Jl. Sunset Road, Seminyak, Kuta, Badung, Bali - Indonesia',
-                'google_maps_embed' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63107.03986877484!2d115.14389965820311!3d-8.685465999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2409b0e5e80db%3A0xe2737d995ffbe3ab!2sSeminyak%2C%20Kuta%2C%20Badung%20Regency%2C%20Bali!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid',
+                'office_address' => 'Jalan Pura Banyukuning No.1, Padangsambian, Kecamatan Denpasar Barat, Kota Denpasar, Bali 80119',
+                'google_maps_embed' => 'https://maps.google.com/maps?q=Jalan+Pura+Banyukuning+No.1,+Padangsambian,+Denpasar+Barat,+Kota+Denpasar,+Bali+80119&t=&z=16&ie=UTF8&iwloc=&output=embed',
                 'operating_hours' => 'Senin - Sabtu: 08:00 - 17:00 WITA',
             ]
         );
