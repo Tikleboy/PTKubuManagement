@@ -32,6 +32,15 @@ class ServiceController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,webp,jpg|max:4096',
             'sort_order' => 'integer|min:0',
             'is_published' => 'nullable',
+        ], [
+            '*.uploaded' => 'File (:attribute) gagal diunggah. Pastikan ukuran file tidak melebihi batas upload server (maksimal 5MB).',
+            '*.max' => 'Ukuran file (:attribute) melebihi batas maksimal 5 MB.',
+            '*.image' => 'File (:attribute) harus berupa gambar yang valid (JPG, PNG, atau WEBP).',
+            '*.mimes' => 'Format file (:attribute) harus bertipe JPG, JPEG, PNG, atau WEBP.',
+        ], [
+            'service_category_id' => 'Kategori Layanan',
+            'title' => 'Nama Layanan',
+            'image' => 'Foto Layanan',
         ]);
 
         $validated['slug'] = Str::slug($validated['title']) . '-' . rand(100, 999);
@@ -71,6 +80,15 @@ class ServiceController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,webp,jpg|max:4096',
             'sort_order' => 'integer|min:0',
             'is_published' => 'nullable',
+        ], [
+            '*.uploaded' => 'File (:attribute) gagal diunggah. Pastikan ukuran file tidak melebihi batas upload server (maksimal 5MB).',
+            '*.max' => 'Ukuran file (:attribute) melebihi batas maksimal 5 MB.',
+            '*.image' => 'File (:attribute) harus berupa gambar yang valid (JPG, PNG, atau WEBP).',
+            '*.mimes' => 'Format file (:attribute) harus bertipe JPG, JPEG, PNG, atau WEBP.',
+        ], [
+            'service_category_id' => 'Kategori Layanan',
+            'title' => 'Nama Layanan',
+            'image' => 'Foto Layanan',
         ]);
 
         $oldImage = $service->image;

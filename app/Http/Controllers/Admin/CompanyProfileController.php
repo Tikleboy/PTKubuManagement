@@ -45,6 +45,14 @@ class CompanyProfileController extends Controller
             'hero_image' => 'nullable|image|mimes:jpeg,png,webp,jpg|max:4096',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
+        ], [
+            '*.uploaded' => 'File (:attribute) gagal diunggah. Pastikan ukuran file tidak melebihi batas upload server (maksimal 5MB).',
+            '*.max' => 'Ukuran file (:attribute) melebihi batas maksimal 5 MB.',
+            '*.image' => 'File (:attribute) harus berupa berkas gambar yang valid (JPG, PNG, atau WEBP).',
+            '*.mimes' => 'Format file (:attribute) harus bertipe JPG, JPEG, PNG, atau WEBP.',
+        ], [
+            'hero_image' => 'Hero Image (Beranda)',
+            'about_image' => 'About Image (Tentang Kami)',
         ]);
 
         $oldAboutImage = $company->about_image;

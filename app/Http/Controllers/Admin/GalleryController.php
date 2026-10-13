@@ -26,6 +26,14 @@ class GalleryController extends Controller
             'gallery_category_id' => 'nullable|exists:gallery_categories,id',
             'image' => 'required|image|mimes:jpeg,png,webp,jpg|max:5120',
             'sort_order' => 'integer|min:0',
+        ], [
+            'image.uploaded' => 'File Foto Galeri gagal diunggah. Pastikan ukuran file tidak melebihi batas upload server (maksimal 5MB).',
+            'image.max' => 'Ukuran Foto Galeri melebihi batas maksimal 5 MB.',
+            'image.image' => 'Foto Galeri harus berupa berkas gambar yang valid (JPG, PNG, atau WEBP).',
+            'image.mimes' => 'Format file Foto Galeri harus bertipe JPG, JPEG, PNG, atau WEBP.',
+        ], [
+            'title' => 'Judul Foto',
+            'image' => 'Foto Galeri',
         ]);
 
         if ($request->hasFile('image')) {
