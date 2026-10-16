@@ -60,8 +60,8 @@
 
                 <!-- Cinematic Visual Column -->
                 <div class="lg:col-span-6 relative">
-                    <div class="relative mx-auto rounded-[32px] overflow-hidden shadow-warm-lg border border-[#E8DEC8] bg-[#2E3A23] group" style="aspect-ratio: 1376 / 768;">
-                        <picture>
+                    <div class="relative mx-auto rounded-[32px] overflow-hidden shadow-warm-lg border border-[#E8DEC8] bg-[#2E3A23] h-[360px] sm:h-[440px] lg:h-[480px] w-full group">
+                        <picture class="block w-full h-full">
                             <source media="(max-width: 768px)" srcset="{{ asset('images/kubu/hero_bali-mobile.webp') }}" type="image/webp">
                             <source media="(min-width: 769px)" srcset="{{ asset('images/kubu/hero_bali.webp') }}" type="image/webp">
                             <img src="{{ asset('images/kubu/hero_bali.jpg') }}" 
@@ -71,7 +71,7 @@
                                  loading="eager" 
                                  fetchpriority="high" 
                                  decoding="async" 
-                                 class="w-full h-[380px] sm:h-[460px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105">
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                         </picture>
                         <div class="absolute inset-0 bg-gradient-to-t from-[#6B2203]/75 via-transparent to-black/10"></div>
                         
