@@ -20,10 +20,14 @@
     <meta property="og:image" content="{{ asset('images/kubu/logo.png') }}">
     <meta property="og:url" content="{{ url()->current() }}">
 
-    <!-- Google Fonts: Fraunces (600, 700) & Albert Sans (400, 500, 600, 700) with swap display -->
+    <!-- Google Fonts: Fraunces (600, 700) & Albert Sans (400, 500, 600, 700) with swap display (Non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap">
+    </noscript>
 
     @if(request()->routeIs('home') || request()->is('/'))
     <!-- Preload Hero LCP Image -->
@@ -72,6 +76,7 @@
                 <!-- Brand / Logo -->
                 <a href="{{ route('home') }}" class="group flex items-center shrink-0 py-1" title="PT. KUBU MANAGEMENT BALI">
                     <picture>
+                        <source media="(max-width: 768px)" srcset="{{ asset('images/kubu/logo-mobile.webp') }}" type="image/webp">
                         <source srcset="{{ asset('images/kubu/logo.webp') }}" type="image/webp">
                         <img src="{{ asset('images/kubu/logo.png') }}" 
                              alt="PT. KUBU MANAGEMENT BALI Logo" 
@@ -261,6 +266,7 @@
                     <div class="space-y-2.5">
                         <div class="inline-block bg-white px-3 py-1.5 rounded-[12px] shadow-sm">
                             <picture>
+                                <source media="(max-width: 768px)" srcset="{{ asset('images/kubu/logo-mobile.webp') }}" type="image/webp">
                                 <source srcset="{{ asset('images/kubu/logo.webp') }}" type="image/webp">
                                 <img src="{{ asset('images/kubu/logo.png') }}" 
                                      alt="PT. KUBU MANAGEMENT BALI Logo" 
