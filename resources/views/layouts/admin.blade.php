@@ -170,5 +170,162 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Global Custom Centered Confirmation Modal (Matched to UI Design) -->
+    <div id="confirmDeleteModal" 
+         class="fixed inset-0 z-[100] flex items-center justify-center p-4 transition-all duration-200 opacity-0 pointer-events-none invisible"
+         role="dialog" 
+         aria-modal="true" 
+         aria-labelledby="confirmDeleteTitle" 
+         aria-describedby="confirmDeleteMessage">
+        
+        <!-- Backdrop with Blur -->
+        <div id="confirmDeleteBackdrop" class="fixed inset-0 bg-black/45 backdrop-blur-sm transition-opacity duration-200"></div>
+
+        <!-- Modal Dialog Card (Centered in viewport) -->
+        <div id="confirmDeleteCard" class="relative bg-white rounded-[24px] p-6 sm:p-8 max-w-[420px] w-full shadow-2xl transition-all duration-200 transform scale-95 z-10 text-center">
+            
+            <!-- Close 'X' Button -->
+            <button type="button" 
+                    id="confirmDeleteCloseBtn" 
+                    class="absolute top-5 right-5 text-gray-400 hover:text-[#43281C] p-1.5 rounded-full hover:bg-[#FAF7F2] transition-colors focus:outline-none"
+                    aria-label="Tutup modal">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <!-- Trash Icon in Warm Circle Badge -->
+            <div class="w-20 h-20 rounded-full bg-[#FAF4ED] flex items-center justify-center mx-auto mb-5">
+                <svg class="w-9 h-9 text-[#8C5E3C]" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 4V2.5C7 2.22386 7.22386 2 7.5 2H16.5C16.7761 2 17 2.22386 17 2.5V4H21.5C21.7761 4 22 4.22386 22 4.5V5.5C22 5.77614 21.7761 6 21.5 6H20.5V20.5C20.5 21.3284 19.8284 22 19 22H5C4.17157 22 3.5 21.3284 3.5 20.5V6H2.5C2.22386 6 2 5.77614 2 5.5V4.5C2 4.22386 2.22386 4 2.5 4H7ZM8.5 3.5V4H15.5V3.5H8.5ZM5.5 6V20.5H18.5V6H5.5ZM8.5 8.5C8.77614 8.5 9 8.72386 9 9V17.5C9 17.7761 8.77614 18 8.5 18C8.22386 18 8 17.7761 8 17.5V9C8 8.72386 8.22386 8.5 8.5 8.5ZM12 8.5C12.2761 8.5 12.5 8.72386 12.5 9V17.5C12.5 17.7761 12.2761 18 12 18C11.7239 18 11.5 17.7761 11.5 17.5V9C11.5 8.72386 11.7239 8.5 12 8.5ZM15.5 8.5C15.7761 8.5 16 8.72386 16 9V17.5C16 17.7761 15.7761 18 15.5 18C15.2239 18 15 17.7761 15 17.5V9C15 8.72386 15.2239 8.5 15.5 8.5Z"/>
+                </svg>
+            </div>
+
+            <!-- Title & Message -->
+            <h3 id="confirmDeleteTitle" class="font-bold text-xl sm:text-2xl text-[#2A1810] mb-2 tracking-tight">
+                Hapus Project?
+            </h3>
+            <p id="confirmDeleteMessage" class="text-xs sm:text-sm text-[#7A5B49] leading-relaxed max-w-[320px] mx-auto mb-7">
+                Apakah kamu yakin ingin menghapus project ini? Tindakan ini tidak dapat dibatalkan.
+            </p>
+
+            <!-- Action Buttons: Batal & Ya, Hapus -->
+            <div class="grid grid-cols-2 gap-3.5">
+                <button type="button" 
+                        id="confirmDeleteCancelBtn" 
+                        class="w-full py-2.5 sm:py-3 px-4 rounded-[14px] border border-[#E8DEC8] hover:bg-[#FAF7F2] text-[#43281C] font-semibold text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#965E03]/20">
+                    Batal
+                </button>
+                <button type="button" 
+                        id="confirmDeleteSubmitBtn" 
+                        class="w-full py-2.5 sm:py-3 px-4 rounded-[14px] bg-[#8C5E3C] hover:bg-[#764C2E] text-white font-semibold text-xs sm:text-sm shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#8C5E3C]/40">
+                    Ya, Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts: Image Preview & Global Confirmation Modal Handlers -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 1. Dynamic File Upload Preview
+            document.addEventListener('change', function (e) {
+                if (e.target && e.target.classList.contains('file-upload-input')) {
+                    const input = e.target;
+                    const container = input.closest('.image-upload-box');
+                    if (!container) return;
+
+                    const placeholder = container.querySelector('.placeholder-icon');
+                    const previewContainer = container.querySelector('.preview-container');
+                    const previewImage = container.querySelector('.preview-image');
+
+                    if (input.files && input.files[0]) {
+                        const file = input.files[0];
+                        if (file.type.startsWith('image/')) {
+                            const reader = new FileReader();
+                            reader.onload = function (evt) {
+                                if (previewImage) {
+                                    previewImage.src = evt.target.result;
+                                }
+                                if (placeholder) {
+                                    placeholder.classList.add('hidden');
+                                }
+                                if (previewContainer) {
+                                    previewContainer.classList.remove('hidden');
+                                }
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                }
+            });
+
+            // 2. Custom Centered Confirmation Modal Controller
+            let pendingFormToSubmit = null;
+            const modal = document.getElementById('confirmDeleteModal');
+            const card = document.getElementById('confirmDeleteCard');
+            const titleEl = document.getElementById('confirmDeleteTitle');
+            const msgEl = document.getElementById('confirmDeleteMessage');
+
+            function openConfirmModal(form) {
+                pendingFormToSubmit = form;
+                const title = form.getAttribute('data-title') || 'Hapus Data?';
+                const message = form.getAttribute('data-message') || 'Apakah kamu yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.';
+
+                if (titleEl) titleEl.textContent = title;
+                if (msgEl) msgEl.textContent = message;
+
+                if (modal && card) {
+                    modal.classList.remove('opacity-0', 'pointer-events-none', 'invisible');
+                    modal.classList.add('opacity-100');
+                    card.classList.remove('scale-95');
+                    card.classList.add('scale-100');
+                    document.body.classList.add('overflow-hidden');
+                }
+            }
+
+            function closeConfirmModal() {
+                if (modal && card) {
+                    modal.classList.remove('opacity-100');
+                    modal.classList.add('opacity-0', 'pointer-events-none', 'invisible');
+                    card.classList.remove('scale-100');
+                    card.classList.add('scale-95');
+                    document.body.classList.remove('overflow-hidden');
+                }
+                pendingFormToSubmit = null;
+            }
+
+            // Intercept form submissions with .confirm-delete-form
+            document.addEventListener('submit', function (e) {
+                const form = e.target;
+                if (form && form.classList.contains('confirm-delete-form')) {
+                    e.preventDefault();
+                    openConfirmModal(form);
+                }
+            });
+
+            // Event Listeners for Modal Actions
+            document.getElementById('confirmDeleteCancelBtn')?.addEventListener('click', closeConfirmModal);
+            document.getElementById('confirmDeleteCloseBtn')?.addEventListener('click', closeConfirmModal);
+            document.getElementById('confirmDeleteBackdrop')?.addEventListener('click', closeConfirmModal);
+
+            document.getElementById('confirmDeleteSubmitBtn')?.addEventListener('click', function () {
+                if (pendingFormToSubmit) {
+                    const form = pendingFormToSubmit;
+                    pendingFormToSubmit = null;
+                    closeConfirmModal();
+                    form.submit();
+                }
+            });
+
+            // Escape key handler
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal && !modal.classList.contains('invisible')) {
+                    closeConfirmModal();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

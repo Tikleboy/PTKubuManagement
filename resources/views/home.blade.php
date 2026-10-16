@@ -60,12 +60,23 @@
 
                 <!-- Cinematic Visual Column -->
                 <div class="lg:col-span-6 relative">
-                    <div class="relative mx-auto rounded-[32px] overflow-hidden shadow-warm-lg border border-[#E8DEC8] bg-white group">
-                        <img src="{{ asset('images/kubu/hero_bali.jpg') }}" alt="Kubu Management Bali Luxury Villa & Garden Care" class="w-full h-[380px] sm:h-[460px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105" loading="eager">
+                    <div class="relative mx-auto rounded-[32px] overflow-hidden shadow-warm-lg border border-[#E8DEC8] bg-[#2E3A23] group" style="aspect-ratio: 1376 / 768;">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="{{ asset('images/kubu/hero_bali-mobile.webp') }}" type="image/webp">
+                            <source media="(min-width: 769px)" srcset="{{ asset('images/kubu/hero_bali.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/kubu/hero_bali.jpg') }}" 
+                                 alt="Kubu Management Bali Luxury Villa & Garden Care" 
+                                 width="1376" 
+                                 height="768" 
+                                 loading="eager" 
+                                 fetchpriority="high" 
+                                 decoding="async" 
+                                 class="w-full h-[380px] sm:h-[460px] lg:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105">
+                        </picture>
                         <div class="absolute inset-0 bg-gradient-to-t from-[#6B2203]/75 via-transparent to-black/10"></div>
                         
                         <!-- Floating Glass Badge -->
-                        <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-5 rounded-[20px] border border-[#E8DEC8] shadow-warm-md flex items-center justify-between gap-4">
+                        <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-[20px] border border-[#E8DEC8] shadow-warm-md flex items-center justify-between gap-4">
                             <div class="space-y-0.5">
                                 <span class="label-caps text-[#965E03] font-bold">{{ __('BALI PROPERTY EXCELLENCE') }}</span>
                                 <p class="text-sm font-fraunces font-bold text-[#6B2203]">{{ __('Pristine Gardens & Spotless Suites') }}</p>
@@ -97,8 +108,18 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
                 <!-- Category 1: Kubu Landscape & Garden -->
                 <div class="bg-white rounded-[24px] overflow-hidden border border-[#E8DEC8] shadow-warm-md hover:shadow-warm-lg transition-all duration-300 flex flex-col group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="{{ asset('images/kubu/landscape_service.jpg') }}" alt="Kubu Landscape & Garden" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                    <div class="relative h-64 overflow-hidden bg-[#2D3A24]">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="{{ asset('images/kubu/landscape_service-mobile.webp') }}" type="image/webp">
+                            <source srcset="{{ asset('images/kubu/landscape_service.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/kubu/landscape_service.jpg') }}" 
+                                 alt="Kubu Landscape & Garden" 
+                                 width="1376" 
+                                 height="768" 
+                                 loading="lazy" 
+                                 decoding="async" 
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        </picture>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                         <div class="absolute bottom-4 left-6">
                             <span class="bg-[#965E03] text-white text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
@@ -107,7 +128,7 @@
                         </div>
                     </div>
 
-                    <div class="p-8 flex-1 flex flex-col justify-between space-y-6">
+                    <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
                         <div class="space-y-3">
                             <h3 class="font-fraunces text-2xl font-bold text-[#6B2203]">
                                 {{ __('LANDSCAPE & GARDEN') }}
@@ -122,32 +143,32 @@
                             <div class="pt-2">
                                 <span class="label-caps text-[#965E03] text-[10px] block mb-2 font-bold">{{ __('KEY SUB-SERVICES:') }}</span>
                                 <div class="grid grid-cols-2 gap-2 text-xs text-[#523A2C]">
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#965E03]"></span>
+                                    <div class="flex items-start gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#965E03] mt-1.5 shrink-0"></span>
                                         <span>{{ __('Garden Maintenance') }}</span>
                                     </div>
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#965E03]"></span>
+                                    <div class="flex items-start gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#965E03] mt-1.5 shrink-0"></span>
                                         <span>{{ __('Landscape Maintenance') }}</span>
                                     </div>
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#965E03]"></span>
+                                    <div class="flex items-start gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#965E03] mt-1.5 shrink-0"></span>
                                         <span>{{ __('Garden Improvement') }}</span>
                                     </div>
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#965E03]"></span>
+                                    <div class="flex items-start gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#965E03] mt-1.5 shrink-0"></span>
                                         <span>{{ __('Irrigation Services') }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="pt-4 border-t border-[#E8DEC8] flex items-center justify-between">
-                            <a href="{{ route('services.landscape') }}" class="btn-primary text-xs px-4 py-2.5">
+                        <div class="pt-4 border-t border-[#E8DEC8] flex flex-col sm:flex-row md:flex-col lg:flex-row items-stretch sm:items-center md:items-stretch lg:items-center justify-between gap-3">
+                            <a href="{{ route('services.landscape') }}" class="btn-primary text-xs px-5 py-3 w-full sm:w-auto md:w-full lg:w-auto text-center justify-center">
                                 <span>{{ __('EXPLORE LANDSCAPE') }}</span>
                                 <span>→</span>
                             </a>
-                            <a href="{{ $globalContact->whatsapp_url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-[#965E03] hover:text-[#6B2203] underline">
+                            <a href="{{ $globalContact->whatsapp_url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-[#965E03] hover:text-[#6B2203] underline text-center sm:text-right md:text-center lg:text-right py-1 whitespace-nowrap transition-colors">
                                 {{ __('Request Quote') }}
                             </a>
                         </div>
@@ -156,8 +177,18 @@
 
                 <!-- Category 2: Kubu Clean / Housekeeping -->
                 <div class="bg-white rounded-[24px] overflow-hidden border border-[#E8DEC8] shadow-warm-md hover:shadow-warm-lg transition-all duration-300 flex flex-col group">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="{{ asset('images/kubu/housekeeping_service.jpg') }}" alt="Kubu Clean / Housekeeping" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                    <div class="relative h-64 overflow-hidden bg-[#43281C]">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="{{ asset('images/kubu/housekeeping_service-mobile.webp') }}" type="image/webp">
+                            <source srcset="{{ asset('images/kubu/housekeeping_service.webp') }}" type="image/webp">
+                            <img src="{{ asset('images/kubu/housekeeping_service.jpg') }}" 
+                                 alt="Kubu Clean / Housekeeping" 
+                                 width="1376" 
+                                 height="768" 
+                                 loading="lazy" 
+                                 decoding="async" 
+                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        </picture>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                         <div class="absolute bottom-4 left-6">
                             <span class="bg-[#6B2203] text-white text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded-full">
@@ -166,7 +197,7 @@
                         </div>
                     </div>
 
-                    <div class="p-8 flex-1 flex flex-col justify-between space-y-6">
+                    <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
                         <div class="space-y-3">
                             <h3 class="font-fraunces text-2xl font-bold text-[#6B2203]">
                                 {{ __('HOUSEKEEPING') }}
@@ -181,32 +212,32 @@
                             <div class="pt-2">
                                 <span class="label-caps text-[#965E03] text-[10px] block mb-2 font-bold">{{ __('KEY SUB-SERVICES:') }}</span>
                                 <div class="grid grid-cols-2 gap-2 text-xs text-[#523A2C]">
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#6B2203]"></span>
+                                    <div class="flex items-start gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#6B2203] mt-1.5 shrink-0"></span>
                                         <span>{{ __('Villa Housekeeping') }}</span>
                                     </div>
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#6B2203]"></span>
+                                    <div class="flex items-start gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#6B2203] mt-1.5 shrink-0"></span>
                                         <span>{{ __('Hotel Housekeeping') }}</span>
                                     </div>
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#6B2203]"></span>
+                                    <div class="flex items-start gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#6B2203] mt-1.5 shrink-0"></span>
                                         <span>{{ __('Residential Care') }}</span>
                                     </div>
-                                    <div class="flex items-center gap-1.5">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-[#6B2203]"></span>
+                                    <div class="flex items-start gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-[#6B2203] mt-1.5 shrink-0"></span>
                                         <span>{{ __('Linen & Sanitization') }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="pt-4 border-t border-[#E8DEC8] flex items-center justify-between">
-                            <a href="{{ route('services.housekeeping') }}" class="btn-primary text-xs px-4 py-2.5">
+                        <div class="pt-4 border-t border-[#E8DEC8] flex flex-col sm:flex-row md:flex-col lg:flex-row items-stretch sm:items-center md:items-stretch lg:items-center justify-between gap-3">
+                            <a href="{{ route('services.housekeeping') }}" class="btn-primary text-xs px-5 py-3 w-full sm:w-auto md:w-full lg:w-auto text-center justify-center">
                                 <span>{{ __('EXPLORE HOUSEKEEPING') }}</span>
                                 <span>→</span>
                             </a>
-                            <a href="{{ $globalContact->whatsapp_url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-[#965E03] hover:text-[#6B2203] underline">
+                            <a href="{{ $globalContact->whatsapp_url ?? '#' }}" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-[#965E03] hover:text-[#6B2203] underline text-center sm:text-right md:text-center lg:text-right py-1 whitespace-nowrap transition-colors">
                                 {{ __('Request Quote') }}
                             </a>
                         </div>
@@ -340,8 +371,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8">
                     <!-- Step 1: Before -->
                     <div class="space-y-3">
-                        <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8]">
-                            <img src="{{ asset('images/kubu/project_before.jpg') }}" alt="Kondisi Awal / Before" class="w-full h-full object-cover" loading="lazy">
+                        <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8] bg-[#43281C]">
+                            <picture>
+                                <source media="(max-width: 768px)" srcset="{{ asset('images/kubu/project_before-mobile.webp') }}" type="image/webp">
+                                <source srcset="{{ asset('images/kubu/project_before.webp') }}" type="image/webp">
+                                <img src="{{ asset('images/kubu/project_before.jpg') }}" alt="Kondisi Awal / Before" width="1376" height="768" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            </picture>
                             <span class="absolute top-3 left-3 bg-[#6B2203] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
                                 {{ __('1. BEFORE') }}
                             </span>
@@ -354,8 +389,12 @@
 
                     <!-- Step 2: Process -->
                     <div class="space-y-3">
-                        <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8]">
-                            <img src="{{ asset('images/kubu/project_process.jpg') }}" alt="Proses Pengerjaan / Process" class="w-full h-full object-cover" loading="lazy">
+                        <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8] bg-[#3B2918]">
+                            <picture>
+                                <source media="(max-width: 768px)" srcset="{{ asset('images/kubu/project_process-mobile.webp') }}" type="image/webp">
+                                <source srcset="{{ asset('images/kubu/project_process.webp') }}" type="image/webp">
+                                <img src="{{ asset('images/kubu/project_process.jpg') }}" alt="Proses Pengerjaan / Process" width="1376" height="768" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            </picture>
                             <span class="absolute top-3 left-3 bg-[#965E03] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
                                 {{ __('2. PROCESS') }}
                             </span>
@@ -368,8 +407,12 @@
 
                     <!-- Step 3: Final Result -->
                     <div class="space-y-3">
-                        <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8]">
-                            <img src="{{ asset('images/kubu/project_after.jpg') }}" alt="Hasil Akhir / Final Result" class="w-full h-full object-cover" loading="lazy">
+                        <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8] bg-[#223824]">
+                            <picture>
+                                <source media="(max-width: 768px)" srcset="{{ asset('images/kubu/project_after-mobile.webp') }}" type="image/webp">
+                                <source srcset="{{ asset('images/kubu/project_after.webp') }}" type="image/webp">
+                                <img src="{{ asset('images/kubu/project_after.jpg') }}" alt="Hasil Akhir / Final Result" width="1376" height="768" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            </picture>
                             <span class="absolute top-3 left-3 bg-[#2D6A4F] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
                                 {{ __('3. FINAL RESULT') }}
                             </span>
@@ -385,9 +428,22 @@
             <!-- Other Projects Grid (Villa A, Hotel B, Villa C, Resort D) -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 @foreach($featuredProjects as $project)
+                    @php
+                        $mainImg = $project->main_image ?? 'images/kubu/hero_bali.jpg';
+                        $webpImg = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $mainImg);
+                        $mobWebpImg = preg_replace('/\.(jpg|jpeg|png)$/i', '-mobile.webp', $mainImg);
+                    @endphp
                     <div class="bg-white rounded-[16px] overflow-hidden border border-[#E8DEC8] shadow-warm-sm hover:shadow-warm-md transition-all group">
-                        <div class="relative h-44 overflow-hidden">
-                            <img src="{{ asset($project->main_image ?? 'images/kubu/hero_bali.jpg') }}" alt="{{ $project->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                        <div class="relative h-44 overflow-hidden bg-[#3B2918]">
+                            <picture>
+                                @if(file_exists(public_path($mobWebpImg)))
+                                    <source media="(max-width: 640px)" srcset="{{ asset($mobWebpImg) }}" type="image/webp">
+                                @endif
+                                @if(file_exists(public_path($webpImg)))
+                                    <source srcset="{{ asset($webpImg) }}" type="image/webp">
+                                @endif
+                                <img src="{{ asset($mainImg) }}" alt="{{ $project->title }}" width="600" height="340" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async">
+                            </picture>
                             <span class="absolute bottom-2 left-3 bg-[#6B2203]/90 text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full">
                                 {{ __($project->category) }}
                             </span>
@@ -438,8 +494,21 @@
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 @foreach($galleryPreviews as $item)
-                    <a href="{{ route('gallery.index') }}" class="group relative rounded-[16px] overflow-hidden aspect-square border border-[#E8DEC8] shadow-warm-sm block">
-                        <img src="{{ asset($item->image_path) }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+                    @php
+                        $gImg = $item->image_path;
+                        $gWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $gImg);
+                        $gMobWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '-mobile.webp', $gImg);
+                    @endphp
+                    <a href="{{ route('gallery.index') }}" class="group relative rounded-[16px] overflow-hidden aspect-square border border-[#E8DEC8] shadow-warm-sm block bg-[#3B2918]">
+                        <picture>
+                            @if(file_exists(public_path($gMobWebp)))
+                                <source media="(max-width: 640px)" srcset="{{ asset($gMobWebp) }}" type="image/webp">
+                            @endif
+                            @if(file_exists(public_path($gWebp)))
+                                <source srcset="{{ asset($gWebp) }}" type="image/webp">
+                            @endif
+                            <img src="{{ asset($gImg) }}" alt="{{ $item->title }}" width="400" height="400" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
+                        </picture>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-3">
                             <span class="text-white text-xs font-fraunces font-bold leading-tight">{{ __($item->title) }}</span>
                             <span class="text-[#D4A574] text-[10px] uppercase font-semibold">{{ __($item->parent_group) }}</span>

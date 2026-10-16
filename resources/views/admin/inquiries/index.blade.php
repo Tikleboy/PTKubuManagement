@@ -52,7 +52,7 @@
                                     <a href="{{ route('admin.inquiries.show', $inq->id) }}" class="font-bold text-[#965E03] hover:underline">
                                         Lihat Pesan
                                     </a>
-                                    <form action="{{ route('admin.inquiries.destroy', $inq->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus pesan ini?')">
+                                    <form action="{{ route('admin.inquiries.destroy', $inq->id) }}" method="POST" class="inline confirm-delete-form" data-title="Hapus Pesan Masuk?" data-message="Apakah kamu yakin ingin menghapus pesan dari &quot;{{ $inq->name }}&quot;? Tindakan ini tidak dapat dibatalkan.">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="font-bold text-red-600 hover:underline">

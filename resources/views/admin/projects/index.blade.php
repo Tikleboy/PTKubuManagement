@@ -14,7 +14,7 @@
                 </p>
             </div>
             <a href="{{ route('admin.projects.create') }}" class="btn-primary text-xs px-4 py-2.5">
-                ➕ Tambah Project Baru
+                Tambah Project Baru
             </a>
         </div>
 
@@ -63,7 +63,7 @@
                                     <a href="{{ route('admin.projects.edit', $p->id) }}" class="font-bold text-[#965E03] hover:underline">
                                         Edit
                                     </a>
-                                    <form action="{{ route('admin.projects.destroy', $p->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus project ini?')">
+                                    <form action="{{ route('admin.projects.destroy', $p->id) }}" method="POST" class="inline confirm-delete-form" data-title="Hapus Project?" data-message="Apakah kamu yakin ingin menghapus project &quot;{{ $p->title }}&quot;? Tindakan ini tidak dapat dibatalkan.">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="font-bold text-red-600 hover:underline">

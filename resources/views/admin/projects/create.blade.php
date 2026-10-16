@@ -32,14 +32,14 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                 <div>
                     <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Lokasi di Bali</label>
                     <input type="text" name="location" value="{{ old('location', 'Seminyak, Bali') }}" placeholder="Contoh: Seminyak, Bali" class="w-full px-3 py-2.5 rounded-[10px] bg-[#FAF7F2] border border-[#E8DEC8] text-xs">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Foto Utama (Cover)</label>
-                    <input type="file" name="main_image" accept="image/*" class="text-xs text-[#7A5B49] mt-1">
+                    <x-image-upload name="main_image" height="h-28" />
                 </div>
             </div>
 
@@ -55,19 +55,19 @@
                 </span>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div class="p-4 rounded-[12px] bg-[#FAF7F2] border border-[#E8DEC8] space-y-2">
+                    <div class="p-4 rounded-[16px] bg-white border border-[#E8DEC8] space-y-2 shadow-warm-sm">
                         <span class="label-caps text-[#6B2203] font-bold text-[10px] block">1. BEFORE IMAGE</span>
-                        <input type="file" name="before_image" accept="image/*" class="text-xs text-[#7A5B49]">
+                        <x-image-upload name="before_image" height="h-32" />
                     </div>
 
-                    <div class="p-4 rounded-[12px] bg-[#FAF7F2] border border-[#E8DEC8] space-y-2">
+                    <div class="p-4 rounded-[16px] bg-white border border-[#E8DEC8] space-y-2 shadow-warm-sm">
                         <span class="label-caps text-[#965E03] font-bold text-[10px] block">2. PROCESS IMAGE</span>
-                        <input type="file" name="process_image" accept="image/*" class="text-xs text-[#7A5B49]">
+                        <x-image-upload name="process_image" height="h-32" />
                     </div>
 
-                    <div class="p-4 rounded-[12px] bg-[#FAF7F2] border border-[#E8DEC8] space-y-2">
+                    <div class="p-4 rounded-[16px] bg-white border border-[#E8DEC8] space-y-2 shadow-warm-sm">
                         <span class="label-caps text-green-800 font-bold text-[10px] block">3. FINAL RESULT IMAGE</span>
-                        <input type="file" name="after_image" accept="image/*" class="text-xs text-[#7A5B49]">
+                        <x-image-upload name="after_image" height="h-32" />
                     </div>
                 </div>
             </div>

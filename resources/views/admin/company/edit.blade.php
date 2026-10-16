@@ -77,22 +77,12 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Hero Image (Halaman Utama)</label>
-                        @if($company->hero_image)
-                            <div class="mb-2 h-28 rounded-[10px] overflow-hidden border border-[#E8DEC8]">
-                                <img src="{{ asset($company->hero_image) }}" alt="Hero" class="w-full h-full object-cover">
-                            </div>
-                        @endif
-                        <input type="file" name="hero_image" accept="image/*" class="text-xs text-[#7A5B49]">
+                        <x-image-upload name="hero_image" :value="$company->hero_image" height="h-36" />
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">About Image (Halaman Tentang Kami)</label>
-                        @if($company->about_image)
-                            <div class="mb-2 h-28 rounded-[10px] overflow-hidden border border-[#E8DEC8]">
-                                <img src="{{ asset($company->about_image) }}" alt="About" class="w-full h-full object-cover">
-                            </div>
-                        @endif
-                        <input type="file" name="about_image" accept="image/*" class="text-xs text-[#7A5B49]">
+                        <x-image-upload name="about_image" :value="$company->about_image" height="h-36" />
                     </div>
                 </div>
             </div>

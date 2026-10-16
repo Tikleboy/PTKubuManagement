@@ -28,17 +28,32 @@
                 <div class="lg:col-span-5 space-y-6">
                     <!-- Editorial Visual -->
                     <div class="relative rounded-[28px] overflow-hidden border border-[#E8DEC8] shadow-warm-lg bg-white group">
-                        <img src="{{ $company->about_image ? asset($company->about_image) : asset('images/kubu/landscape_service.jpg') }}" 
-                             alt="Kubu Management Bali Professional Team" 
-                             class="w-full h-[400px] sm:h-[480px] lg:h-[520px] object-cover transition-transform duration-700 group-hover:scale-105" 
-                             loading="lazy">
+                        @php
+                            $aboutImg = $company->about_image ? asset($company->about_image) : asset('images/kubu/landscape_service.jpg');
+                            $aboutWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $aboutImg);
+                            $aboutMobWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '-mobile.webp', $aboutImg);
+                        @endphp
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="{{ $aboutMobWebp }}" type="image/webp">
+                            <source srcset="{{ $aboutWebp }}" type="image/webp">
+                            <img src="{{ $aboutImg }}" 
+                                 alt="Kubu Management Bali Professional Team" 
+                                 width="1376"
+                                 height="768"
+                                 class="w-full h-[400px] sm:h-[480px] lg:h-[520px] object-cover transition-transform duration-700 group-hover:scale-105" 
+                                 loading="lazy"
+                                 decoding="async">
+                        </picture>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent"></div>
                         
                         <!-- Floating Badge on Image -->
                         <div class="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-[20px] border border-[#E8DEC8] shadow-warm-md">
                             <div class="flex items-center gap-3">
                                 <div class="w-11 h-11 rounded-full bg-white border border-[#E8DEC8] flex items-center justify-center p-1.5 shrink-0 shadow-sm">
-                                    <img src="{{ asset('images/kubu/logo-emblem.png') }}" alt="Kubu Management Logo" class="w-full h-full object-contain">
+                                    <picture>
+                                        <source srcset="{{ asset('images/kubu/logo-emblem.webp') }}" type="image/webp">
+                                        <img src="{{ asset('images/kubu/logo-emblem.png') }}" alt="Kubu Management Logo" width="44" height="44" class="w-full h-full object-contain" loading="lazy" decoding="async">
+                                    </picture>
                                 </div>
                                 <div class="min-w-0">
                                     <p class="font-fraunces font-bold text-sm sm:text-base text-[#6B2203] truncate">PT. KUBU MANAGEMENT BALI</p>

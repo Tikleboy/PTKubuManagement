@@ -33,8 +33,21 @@
             <!-- Project Main Overview -->
             <div class="bg-white rounded-[28px] border border-[#E8DEC8] p-8 sm:p-12 shadow-warm-md">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    <div class="lg:col-span-7 rounded-[20px] overflow-hidden border border-[#E8DEC8]">
-                        <img src="{{ asset($project->main_image ?? 'images/kubu/hero_bali.jpg') }}" alt="{{ __($project->title) }}" class="w-full h-[360px] sm:h-[420px] object-cover">
+                    <div class="lg:col-span-7 rounded-[20px] overflow-hidden border border-[#E8DEC8] bg-[#3B2918]">
+                        @php
+                            $showMain = $project->main_image ?? 'images/kubu/hero_bali.jpg';
+                            $showMainWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $showMain);
+                            $showMainMobWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '-mobile.webp', $showMain);
+                        @endphp
+                        <picture>
+                            @if(file_exists(public_path($showMainMobWebp)))
+                                <source media="(max-width: 640px)" srcset="{{ asset($showMainMobWebp) }}" type="image/webp">
+                            @endif
+                            @if(file_exists(public_path($showMainWebp)))
+                                <source srcset="{{ asset($showMainWebp) }}" type="image/webp">
+                            @endif
+                            <img src="{{ asset($showMain) }}" alt="{{ __($project->title) }}" width="800" height="450" class="w-full h-[360px] sm:h-[420px] object-cover" loading="lazy" decoding="async">
+                        </picture>
                     </div>
                     <div class="lg:col-span-5 space-y-4">
                         <span class="label-caps text-[#965E03] font-bold">{{ __('WORK SUMMARY') }}</span>
@@ -67,9 +80,18 @@
                     <!-- Before -->
                     <div class="bg-white rounded-[24px] p-6 border border-[#E8DEC8] shadow-warm-sm flex flex-col justify-between space-y-4">
                         <div class="space-y-3">
-                            <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8]">
-                                @php $beforeImg = $project->images->where('image_type', 'before')->first(); @endphp
-                                <img src="{{ asset($beforeImg->image_path ?? 'images/kubu/project_before.jpg') }}" alt="Before" class="w-full h-full object-cover">
+                            <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8] bg-[#43281C]">
+                                @php 
+                                    $beforeImg = $project->images->where('image_type', 'before')->first(); 
+                                    $bPath = $beforeImg->image_path ?? 'images/kubu/project_before.jpg';
+                                    $bWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $bPath);
+                                @endphp
+                                <picture>
+                                    @if(file_exists(public_path($bWebp)))
+                                        <source srcset="{{ asset($bWebp) }}" type="image/webp">
+                                    @endif
+                                    <img src="{{ asset($bPath) }}" alt="Before" width="600" height="450" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                                </picture>
                                 <span class="absolute top-3 left-3 bg-[#6B2203] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
                                     1. {{ __('BEFORE') }}
                                 </span>
@@ -84,9 +106,18 @@
                     <!-- Process -->
                     <div class="bg-white rounded-[24px] p-6 border border-[#E8DEC8] shadow-warm-sm flex flex-col justify-between space-y-4">
                         <div class="space-y-3">
-                            <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8]">
-                                @php $processImg = $project->images->where('image_type', 'process')->first(); @endphp
-                                <img src="{{ asset($processImg->image_path ?? 'images/kubu/project_process.jpg') }}" alt="Process" class="w-full h-full object-cover">
+                            <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8] bg-[#3B2918]">
+                                @php 
+                                    $processImg = $project->images->where('image_type', 'process')->first(); 
+                                    $prPath = $processImg->image_path ?? 'images/kubu/project_process.jpg';
+                                    $prWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $prPath);
+                                @endphp
+                                <picture>
+                                    @if(file_exists(public_path($prWebp)))
+                                        <source srcset="{{ asset($prWebp) }}" type="image/webp">
+                                    @endif
+                                    <img src="{{ asset($prPath) }}" alt="Process" width="600" height="450" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                                </picture>
                                 <span class="absolute top-3 left-3 bg-[#965E03] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
                                     2. {{ __('PROCESS') }}
                                 </span>
@@ -101,9 +132,18 @@
                     <!-- Final Result -->
                     <div class="bg-white rounded-[24px] p-6 border border-[#E8DEC8] shadow-warm-sm flex flex-col justify-between space-y-4">
                         <div class="space-y-3">
-                            <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8]">
-                                @php $afterImg = $project->images->where('image_type', 'after')->first(); @endphp
-                                <img src="{{ asset($afterImg->image_path ?? 'images/kubu/project_after.jpg') }}" alt="Final Result" class="w-full h-full object-cover">
+                            <div class="relative rounded-[16px] overflow-hidden aspect-[4/3] border border-[#E8DEC8] bg-[#223824]">
+                                @php 
+                                    $afterImg = $project->images->where('image_type', 'after')->first(); 
+                                    $afPath = $afterImg->image_path ?? 'images/kubu/project_after.jpg';
+                                    $afWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $afPath);
+                                @endphp
+                                <picture>
+                                    @if(file_exists(public_path($afWebp)))
+                                        <source srcset="{{ asset($afWebp) }}" type="image/webp">
+                                    @endif
+                                    <img src="{{ asset($afPath) }}" alt="Final Result" width="600" height="450" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                                </picture>
                                 <span class="absolute top-3 left-3 bg-[#2D6A4F] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
                                     3. {{ __('FINAL RESULT') }}
                                 </span>

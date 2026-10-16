@@ -81,7 +81,7 @@
                     </button>
                 </form>
 
-                <form action="{{ route('admin.inquiries.destroy', $inquiry->id) }}" method="POST" onsubmit="return confirm('Hapus pesan ini?')">
+                <form action="{{ route('admin.inquiries.destroy', $inquiry->id) }}" method="POST" class="confirm-delete-form" data-title="Hapus Pesan Masuk?" data-message="Apakah kamu yakin ingin menghapus pesan dari &quot;{{ $inquiry->name }}&quot;? Tindakan ini tidak dapat dibatalkan.">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="text-xs text-red-600 font-semibold hover:underline">

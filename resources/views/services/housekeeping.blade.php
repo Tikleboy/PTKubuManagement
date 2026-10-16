@@ -29,8 +29,12 @@
     <section class="py-16 lg:py-24 bg-[#FAF7F2]">
         <div class="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-16">
             <!-- Hero Housekeeping Visual Banner -->
-            <div class="rounded-[28px] overflow-hidden border border-[#E8DEC8] shadow-warm-md bg-white">
-                <img src="{{ asset('images/kubu/housekeeping_service.jpg') }}" alt="Kubu Housekeeping Service Bali" class="w-full h-[320px] sm:h-[420px] object-cover">
+            <div class="rounded-[28px] overflow-hidden border border-[#E8DEC8] shadow-warm-md bg-[#43281C]">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="{{ asset('images/kubu/housekeeping_service-mobile.webp') }}" type="image/webp">
+                    <source srcset="{{ asset('images/kubu/housekeeping_service.webp') }}" type="image/webp">
+                    <img src="{{ asset('images/kubu/housekeeping_service.jpg') }}" alt="Kubu Housekeeping Service Bali" width="1376" height="768" class="w-full h-[320px] sm:h-[420px] object-cover" loading="lazy" decoding="async">
+                </picture>
             </div>
 
             <!-- 3 Service Categories Grid -->

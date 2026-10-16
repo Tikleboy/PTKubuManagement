@@ -21,7 +21,7 @@
     <section class="py-16 lg:py-24 bg-[#FAF7F2]">
         <div class="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-16">
             <!-- 1. Kubu Landscape & Garden Division -->
-            <div class="bg-white rounded-[32px] border border-[#E8DEC8] p-8 sm:p-12 shadow-warm-md">
+            <div class="bg-white rounded-[32px] border border-[#E8DEC8] p-6 sm:p-12 shadow-warm-md">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-8 border-b border-[#E8DEC8]">
                     <div class="lg:col-span-8 space-y-3">
                         <span class="label-caps text-[#965E03] font-bold">{{ __('DIVISION 01') }}</span>
@@ -33,7 +33,7 @@
                         </p>
                     </div>
                     <div class="lg:col-span-4 lg:text-right">
-                        <a href="{{ route('services.landscape') }}" class="btn-primary">
+                        <a href="{{ route('services.landscape') }}" class="btn-primary w-full sm:w-auto text-center justify-center">
                             <span>{{ __('EXPLORE LANDSCAPE DIVISION') }}</span>
                             <span>→</span>
                         </a>
@@ -109,7 +109,7 @@
             </div>
 
             <!-- 2. Kubu Clean / Housekeeping Division -->
-            <div class="bg-white rounded-[32px] border border-[#E8DEC8] p-8 sm:p-12 shadow-warm-md">
+            <div class="bg-white rounded-[32px] border border-[#E8DEC8] p-6 sm:p-12 shadow-warm-md">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-8 border-b border-[#E8DEC8]">
                     <div class="lg:col-span-8 space-y-3">
                         <span class="label-caps text-[#6B2203] font-bold">{{ __('DIVISION 02') }}</span>
@@ -121,7 +121,7 @@
                         </p>
                     </div>
                     <div class="lg:col-span-4 lg:text-right">
-                        <a href="{{ route('services.housekeeping') }}" class="btn-primary">
+                        <a href="{{ route('services.housekeeping') }}" class="btn-primary w-full sm:w-auto text-center justify-center">
                             <span>{{ __('EXPLORE HOUSEKEEPING DIVISION') }}</span>
                             <span>→</span>
                         </a>

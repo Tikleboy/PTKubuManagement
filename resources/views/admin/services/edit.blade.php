@@ -48,19 +48,14 @@
                 <textarea name="features" rows="5" class="w-full px-3 py-2.5 rounded-[10px] bg-[#FAF7F2] border border-[#E8DEC8] text-xs">{{ old('features', $featuresText) }}</textarea>
             </div>
 
-            <div class="grid grid-cols-2 gap-4 items-center">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                 <div>
                     <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Urutan Tampil (Sort Order)</label>
                     <input type="number" name="sort_order" value="{{ old('sort_order', $service->sort_order) }}" class="w-full px-3 py-2 rounded-[10px] bg-[#FAF7F2] border border-[#E8DEC8] text-xs">
                 </div>
                 <div>
-                    <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Ganti Foto Layanan</label>
-                    @if($service->image)
-                        <div class="mb-1 w-16 h-10 rounded overflow-hidden border border-[#E8DEC8]">
-                            <img src="{{ asset($service->image) }}" alt="" class="w-full h-full object-cover">
-                        </div>
-                    @endif
-                    <input type="file" name="image" accept="image/*" class="text-xs text-[#7A5B49]">
+                    <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Foto Layanan</label>
+                    <x-image-upload name="image" :value="$service->image" height="h-28" />
                 </div>
             </div>
 

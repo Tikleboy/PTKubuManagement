@@ -14,7 +14,7 @@
                 </p>
             </div>
             <a href="{{ route('admin.services.create') }}" class="btn-primary text-xs px-4 py-2.5">
-                ➕ Tambah Layanan Baru
+                Tambah Layanan Baru
             </a>
         </div>
 
@@ -57,7 +57,7 @@
                                     <a href="{{ route('admin.services.edit', $s->id) }}" class="font-bold text-[#965E03] hover:underline">
                                         Edit
                                     </a>
-                                    <form action="{{ route('admin.services.destroy', $s->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus layanan ini?')">
+                                    <form action="{{ route('admin.services.destroy', $s->id) }}" method="POST" class="inline confirm-delete-form" data-title="Hapus Layanan?" data-message="Apakah kamu yakin ingin menghapus layanan &quot;{{ $s->title }}&quot;? Tindakan ini tidak dapat dibatalkan.">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="font-bold text-red-600 hover:underline">

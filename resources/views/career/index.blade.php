@@ -54,9 +54,9 @@
                                 @endif
                             </div>
 
-                            <div class="pt-4 border-t border-[#E8DEC8] flex items-center justify-between">
+                            <div class="pt-4 border-t border-[#E8DEC8] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                                 <span class="text-xs text-[#7A5B49]">{{ __('Location:') }} {{ $career->location }}</span>
-                                <a href="mailto:{{ $globalContact->email ?? 'info@kubumanagementbali.com' }}?subject=Application%20for%20{{ urlencode($career->position) }}" class="btn-primary text-xs px-5 py-2.5">
+                                <a href="mailto:{{ $globalContact->email ?? 'info@kubumanagementbali.com' }}?subject=Application%20for%20{{ urlencode($career->position) }}" class="btn-primary text-xs px-5 py-2.5 w-full sm:w-auto text-center justify-center">
                                     <span>{{ __('APPLY VIA EMAIL') }}</span>
                                     <span>→</span>
                                 </a>

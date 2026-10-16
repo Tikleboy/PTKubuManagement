@@ -16,7 +16,7 @@
         <!-- Upload Form -->
         <div class="bg-white p-6 sm:p-8 rounded-[20px] border border-[#E8DEC8] shadow-warm-sm space-y-4">
             <h2 class="font-fraunces text-lg font-bold text-[#6B2203] border-b border-[#E8DEC8] pb-2">
-                ➕ Unggah Foto Baru ke Galeri
+                Unggah Foto Baru ke Galeri
             </h2>
 
             <form action="{{ route('admin.gallery.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                     <div>
                         <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Keterangan / Caption</label>
                         <input type="text" name="caption" placeholder="Uraian singkat foto..." class="w-full px-3 py-2 rounded-[10px] bg-[#FAF7F2] border border-[#E8DEC8] text-xs">
@@ -55,7 +55,7 @@
 
                     <div>
                         <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Pilih File Gambar</label>
-                        <input type="file" name="image" required accept="image/*" class="text-xs text-[#7A5B49] mt-1">
+                        <x-image-upload name="image" required height="h-28" />
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@
                             <p class="font-bold text-xs text-[#43281C] truncate">{{ $img->title }}</p>
                             <p class="text-[10px] text-[#7A5B49] truncate">{{ $img->category->name ?? '-' }}</p>
                             <div class="pt-2 border-t border-[#E8DEC8] text-right">
-                                <form action="{{ route('admin.gallery.destroy', $img->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus foto ini dari galeri?')">
+                                <form action="{{ route('admin.gallery.destroy', $img->id) }}" method="POST" class="inline confirm-delete-form" data-title="Hapus Foto Galeri?" data-message="Apakah kamu yakin ingin menghapus foto &quot;{{ $img->title }}&quot; dari galeri? Tindakan ini tidak dapat dibatalkan.">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-[11px] font-bold text-red-600 hover:underline">

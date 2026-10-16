@@ -24,8 +24,21 @@
         <div class="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="rounded-[24px] overflow-hidden border border-[#E8DEC8] shadow-warm-md bg-white">
-                        <img src="{{ asset($service->image ?? 'images/kubu/landscape_service.jpg') }}" alt="{{ __($service->title) }}" class="w-full h-[360px] sm:h-[440px] object-cover">
+                    <div class="rounded-[24px] overflow-hidden border border-[#E8DEC8] shadow-warm-md bg-[#2D3A24]">
+                        @php
+                            $sImg = $service->image ?? 'images/kubu/landscape_service.jpg';
+                            $sWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $sImg);
+                            $sMobWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '-mobile.webp', $sImg);
+                        @endphp
+                        <picture>
+                            @if(file_exists(public_path($sMobWebp)))
+                                <source media="(max-width: 640px)" srcset="{{ asset($sMobWebp) }}" type="image/webp">
+                            @endif
+                            @if(file_exists(public_path($sWebp)))
+                                <source srcset="{{ asset($sWebp) }}" type="image/webp">
+                            @endif
+                            <img src="{{ asset($sImg) }}" alt="{{ __($service->title) }}" width="800" height="450" class="w-full h-[360px] sm:h-[440px] object-cover" loading="lazy" decoding="async">
+                        </picture>
                     </div>
 
                     <div class="bg-white p-8 rounded-[24px] border border-[#E8DEC8] shadow-warm-sm space-y-4">

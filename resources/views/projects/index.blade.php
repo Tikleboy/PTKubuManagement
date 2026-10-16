@@ -37,8 +37,21 @@
                 @forelse($projects as $project)
                     <div class="bg-white rounded-[24px] overflow-hidden border border-[#E8DEC8] shadow-warm-md hover:shadow-warm-lg transition-all duration-300 flex flex-col group">
                         <!-- Main Image -->
-                        <div class="relative h-64 overflow-hidden">
-                            <img src="{{ asset($project->main_image ?? 'images/kubu/hero_bali.jpg') }}" alt="{{ __($project->title) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                        <div class="relative h-64 overflow-hidden bg-[#3B2918]">
+                            @php
+                                $pMain = $project->main_image ?? 'images/kubu/hero_bali.jpg';
+                                $pWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $pMain);
+                                $pMobWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '-mobile.webp', $pMain);
+                            @endphp
+                            <picture>
+                                @if(file_exists(public_path($pMobWebp)))
+                                    <source media="(max-width: 640px)" srcset="{{ asset($pMobWebp) }}" type="image/webp">
+                                @endif
+                                @if(file_exists(public_path($pWebp)))
+                                    <source srcset="{{ asset($pWebp) }}" type="image/webp">
+                                @endif
+                                <img src="{{ asset($pMain) }}" alt="{{ __($project->title) }}" width="600" height="340" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async">
+                            </picture>
                             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                             <div class="absolute bottom-4 left-6 flex items-center gap-2">
                                 <span class="bg-[#965E03] text-white text-[11px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -68,8 +81,17 @@
                                         <span class="label-caps text-[#965E03] text-[10px] block mb-2 font-bold">{{ __('DOCUMENTATION PHASE:') }}</span>
                                         <div class="grid grid-cols-3 gap-2">
                                             @foreach($project->images as $img)
-                                                <div class="relative rounded-[8px] overflow-hidden aspect-[4/3] border border-[#E8DEC8]">
-                                                    <img src="{{ asset($img->image_path) }}" alt="{{ $img->caption }}" class="w-full h-full object-cover">
+                                                @php
+                                                    $subImg = $img->image_path;
+                                                    $subWebp = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $subImg);
+                                                @endphp
+                                                <div class="relative rounded-[8px] overflow-hidden aspect-[4/3] border border-[#E8DEC8] bg-[#2E2015]">
+                                                    <picture>
+                                                        @if(file_exists(public_path($subWebp)))
+                                                            <source srcset="{{ asset($subWebp) }}" type="image/webp">
+                                                        @endif
+                                                        <img src="{{ asset($subImg) }}" alt="{{ $img->caption }}" width="200" height="150" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                                                    </picture>
                                                     <span class="absolute bottom-1 left-1 bg-black/70 text-white text-[9px] uppercase px-1.5 py-0.5 rounded font-bold">
                                                         {{ __($img->image_type) }}
                                                     </span>

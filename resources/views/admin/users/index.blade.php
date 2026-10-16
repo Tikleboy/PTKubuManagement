@@ -83,7 +83,7 @@
                                     </a>
 
                                     @if($user->id !== auth()->id())
-                                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus akun admin {{ $user->name }}? Tindakan ini tidak dapat dibatalkan.')">
+                                        <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="inline confirm-delete-form" data-title="Hapus Akun Admin?" data-message="Apakah kamu yakin ingin menghapus akun admin &quot;{{ $user->name }}&quot;? Tindakan ini tidak dapat dibatalkan.">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="font-bold text-red-600 hover:underline inline-flex items-center gap-1 ml-2">

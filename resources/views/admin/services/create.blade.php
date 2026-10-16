@@ -43,14 +43,14 @@
                 <span class="text-[11px] text-[#7A5B49]">Tulis tiap poin cakupan kerja dalam baris baru (enter).</span>
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                 <div>
                     <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Urutan Tampil (Sort Order)</label>
                     <input type="number" name="sort_order" value="0" class="w-full px-3 py-2 rounded-[10px] bg-[#FAF7F2] border border-[#E8DEC8] text-xs">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Foto Layanan</label>
-                    <input type="file" name="image" accept="image/*" class="text-xs text-[#7A5B49] mt-1">
+                    <x-image-upload name="image" height="h-28" />
                 </div>
             </div>
 

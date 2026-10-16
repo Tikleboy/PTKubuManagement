@@ -33,19 +33,14 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                 <div>
                     <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Lokasi di Bali</label>
                     <input type="text" name="location" value="{{ old('location', $project->location) }}" class="w-full px-3 py-2.5 rounded-[10px] bg-[#FAF7F2] border border-[#E8DEC8] text-xs">
                 </div>
                 <div>
                     <label class="block text-xs font-bold text-[#6B2203] uppercase mb-1">Foto Utama (Cover)</label>
-                    @if($project->main_image)
-                        <div class="mb-1 w-16 h-10 rounded overflow-hidden border border-[#E8DEC8]">
-                            <img src="{{ asset($project->main_image) }}" alt="" class="w-full h-full object-cover">
-                        </div>
-                    @endif
-                    <input type="file" name="main_image" accept="image/*" class="text-xs text-[#7A5B49]">
+                    <x-image-upload name="main_image" :value="$project->main_image" height="h-28" />
                 </div>
             </div>
 
@@ -63,38 +58,23 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <!-- Before -->
                     @php $beforeImg = $project->images->where('image_type', 'before')->first(); @endphp
-                    <div class="p-4 rounded-[12px] bg-[#FAF7F2] border border-[#E8DEC8] space-y-2">
+                    <div class="p-4 rounded-[16px] bg-white border border-[#E8DEC8] space-y-2 shadow-warm-sm">
                         <span class="label-caps text-[#6B2203] font-bold text-[10px] block">1. BEFORE IMAGE</span>
-                        @if($beforeImg)
-                            <div class="h-20 rounded overflow-hidden border border-[#E8DEC8]">
-                                <img src="{{ asset($beforeImg->image_path) }}" alt="Before" class="w-full h-full object-cover">
-                            </div>
-                        @endif
-                        <input type="file" name="before_image" accept="image/*" class="text-xs text-[#7A5B49]">
+                        <x-image-upload name="before_image" :value="$beforeImg?->image_path" height="h-32" />
                     </div>
 
                     <!-- Process -->
                     @php $processImg = $project->images->where('image_type', 'process')->first(); @endphp
-                    <div class="p-4 rounded-[12px] bg-[#FAF7F2] border border-[#E8DEC8] space-y-2">
+                    <div class="p-4 rounded-[16px] bg-white border border-[#E8DEC8] space-y-2 shadow-warm-sm">
                         <span class="label-caps text-[#965E03] font-bold text-[10px] block">2. PROCESS IMAGE</span>
-                        @if($processImg)
-                            <div class="h-20 rounded overflow-hidden border border-[#E8DEC8]">
-                                <img src="{{ asset($processImg->image_path) }}" alt="Process" class="w-full h-full object-cover">
-                            </div>
-                        @endif
-                        <input type="file" name="process_image" accept="image/*" class="text-xs text-[#7A5B49]">
+                        <x-image-upload name="process_image" :value="$processImg?->image_path" height="h-32" />
                     </div>
 
                     <!-- Final Result -->
                     @php $afterImg = $project->images->where('image_type', 'after')->first(); @endphp
-                    <div class="p-4 rounded-[12px] bg-[#FAF7F2] border border-[#E8DEC8] space-y-2">
+                    <div class="p-4 rounded-[16px] bg-white border border-[#E8DEC8] space-y-2 shadow-warm-sm">
                         <span class="label-caps text-green-800 font-bold text-[10px] block">3. FINAL RESULT IMAGE</span>
-                        @if($afterImg)
-                            <div class="h-20 rounded overflow-hidden border border-[#E8DEC8]">
-                                <img src="{{ asset($afterImg->image_path) }}" alt="After" class="w-full h-full object-cover">
-                            </div>
-                        @endif
-                        <input type="file" name="after_image" accept="image/*" class="text-xs text-[#7A5B49]">
+                        <x-image-upload name="after_image" :value="$afterImg?->image_path" height="h-32" />
                     </div>
                 </div>
             </div>

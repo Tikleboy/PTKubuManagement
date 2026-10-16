@@ -58,9 +58,22 @@
             <!-- Responsive Gallery Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @forelse($images as $img)
-                    <div class="gallery-card bg-white rounded-[20px] overflow-hidden border border-[#E8DEC8] shadow-warm-sm hover:shadow-warm-md transition-all group cursor-pointer" onclick="openLightbox('{{ asset($img->image_path) }}', '{{ addslashes(__($img->title)) }}', '{{ addslashes(__($img->caption ?? '')) }}')">
-                        <div class="relative aspect-square overflow-hidden bg-[#F5F1E8]">
-                            <img src="{{ asset($img->image_path) }}" alt="{{ __($img->title) }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                    @php
+                        $imgPath = $img->image_path;
+                        $webpPath = preg_replace('/\.(jpg|jpeg|png)$/i', '.webp', $imgPath);
+                        $mobWebpPath = preg_replace('/\.(jpg|jpeg|png)$/i', '-mobile.webp', $imgPath);
+                    @endphp
+                    <div class="gallery-card bg-white rounded-[20px] overflow-hidden border border-[#E8DEC8] shadow-warm-sm hover:shadow-warm-md transition-all group cursor-pointer" onclick="openLightbox('{{ file_exists(public_path($webpPath)) ? asset($webpPath) : asset($img->image_path) }}', '{{ addslashes(__($img->title)) }}', '{{ addslashes(__($img->caption ?? '')) }}')">
+                        <div class="relative aspect-square overflow-hidden bg-[#2D2319]">
+                            <picture>
+                                @if(file_exists(public_path($mobWebpPath)))
+                                    <source media="(max-width: 640px)" srcset="{{ asset($mobWebpPath) }}" type="image/webp">
+                                @endif
+                                @if(file_exists(public_path($webpPath)))
+                                    <source srcset="{{ asset($webpPath) }}" type="image/webp">
+                                @endif
+                                <img src="{{ asset($img->image_path) }}" alt="{{ __($img->title) }}" width="400" height="400" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async">
+                            </picture>
                             <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                                 <span class="text-[10px] uppercase font-bold tracking-wider text-[#D4A574]">
                                     {{ __($img->parent_group) }} • {{ __($img->category->name ?? '') }}
