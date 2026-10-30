@@ -122,7 +122,7 @@
                     </div>
                     <div class="lg:col-span-4 lg:text-right">
                         <a href="{{ route('services.housekeeping') }}" class="btn-primary w-full sm:w-auto text-center justify-center">
-                            <span>{{ __('EXPLORE HOUSEKEEPING DIVISION') }}</span>
+                                <span>{{ __('EXPLORE HOUSEKEEPING DIVISION') }}</span>
                             <span>→</span>
                         </a>
                     </div>
